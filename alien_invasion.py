@@ -1,6 +1,6 @@
 # Name: Janet Portillo
 # GitHub: JPort-GH
-# Date: 07.13.2026
+# Date: 07.12.2026
 
 import sys
 import pygame
@@ -14,19 +14,23 @@ class AlienInvasion:
         pygame.init()
         self.settings = Settings()
 
+        # Create the game window
         self.screen = pygame.display.set_mode(
             (self.settings.screen_w, self.settings.screen_h)
         )
         pygame.display.set_caption(self.settings.name)
 
+        # Load background image
         self.bg_image = pygame.image.load(self.settings.bg_file)
 
+        # Create the ship
         self.ship = Ship(self)
 
         self.running = True
         self.clock = pygame.time.Clock()
 
     def run_game(self) -> None:
+        """Start the main loop for the game."""
         while self.running:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -34,8 +38,25 @@ class AlienInvasion:
                     pygame.quit()
                     sys.exit()
 
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = True
+                    elif event.key == pygame.K_LEFT:
+                        self.ship.moving_left = True
+
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = False
+                    elif event.key == pygame.K_LEFT:
+                        self.ship.moving_left = False
+
+            # Update ship position
+            self.ship.update()
+
+            # Draw background and ship
             self.screen.blit(self.bg_image, (0, 0))
             self.ship.blitme()
+
             pygame.display.flip()
             self.clock.tick(self.settings.FPS)
 
