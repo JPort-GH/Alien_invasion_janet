@@ -1,6 +1,6 @@
 # Name: Janet Portillo
 # GitHub: JPort-GH
-# Date: 07.13.2026
+# Date: 07.12.2026
 
 from pathlib import Path
 
@@ -12,4 +12,16 @@ class Settings:
         self.screen_w = 1200
         self.screen_h = 800
         self.FPS = 60
-        self.bg_file = Path.cwd() / "Assets" / "images" / "Starbasesnow.png"
+
+        # Professor's intro background (blank/no background)
+        self.bg_file = Path.cwd() / "Assets" / "images" / "no_background.png"
+
+        # Sounds
+        self.intro_sound = Path.cwd() / "Assets" / "sounds" / "intro.wav"
+        self.laser_sound = Path.cwd() / "Assets" / "sounds" / "laser.wav"
+
+        # Ship settings
+        self.ship_speed = 3
+
+        # Laser settings
+        self.laser_speed = 6
